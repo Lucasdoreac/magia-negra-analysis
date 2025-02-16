@@ -1,103 +1,118 @@
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', function() {
+  // Gerenciamento do Menu Móvel
+  const navToggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('nav');
+  
+  if (navToggle && nav) {
+    // Toggle menu
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nav.classList.toggle('active');
+      navToggle.setAttribute('aria-expanded', nav.classList.contains('active'));
+    });
+
+    // Fechar menu ao clicar fora
+    document.addEventListener('click', (e) => {
+      if (nav.classList.contains('active') && !nav.contains(e.target)) {
+        nav.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Fechar menu ao clicar em links
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // Carregamento de Conteúdo
   const mainContent = document.querySelector('#content');
   const loadingElement = document.querySelector('#loading');
-  const sections = [
-    'introducao', 
-    'panic', 
-    'evandro', 
-    'percepcao', 
-    'controle', 
-    'impacto',
-    'academico',
-    'vozes',
-    'recursos'
-  ];
+  const sections = ['introducao', 'panic', 'evandro', 'percepcao', 'acao-direta', 'engajamento', 'ferramentas'];
   
-  try {
-    const contentPromises = sections.map(section =>
-      fetch(`sections/${section}.html`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.text();
-        })
-    );
+  async function loadContent() {
+    try {
+      const contentPromises = sections.map(section =>
+        fetch(`sections/${section}.html`)
+          .then(response => {
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return response.text();
+          })
+      );
 
-    const contents = await Promise.all(contentPromises);
-    loadingElement.remove();
-    contents.forEach(content => {
-      mainContent.innerHTML += content;
-    });
-
-    // Adiciona animação suave ao scroll para links internos
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+      const contents = await Promise.all(contentPromises);
+      if (loadingElement) loadingElement.style.display = 'none';
+      if (mainContent) {
+        contents.forEach(content => {
+          mainContent.innerHTML += content;
+        });
+        
+        // Adiciona animações de entrada para seções
+        const allSections = document.querySelectorAll('.section-content');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
           });
-        }
-      });
-    });
+        }, {
+          threshold: 0.1
+        });
 
-    // Adiciona animações de entrada para seções
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          // Carrega imagens quando a seção se torna visível
-          entry.target.querySelectorAll('img[loading="lazy"]').forEach(img => {
-            img.src = img.getAttribute('data-src');
-          });
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.section-content').forEach(section => {
-      section.classList.add('fade-in');
-      sectionObserver.observe(section);
-    });
-
-    // Atualiza navegação ativa durante o scroll
-    const nav = document.querySelector('nav');
-    const navHeight = nav.offsetHeight;
-    
-    window.addEventListener('scroll', () => {
-      let currentSection = '';
-      
-      sections.forEach(sectionId => {
-        const section = document.querySelector(`#${sectionId}`);
-        if (section) {
-          const sectionTop = section.offsetTop - navHeight;
-          const sectionHeight = section.offsetHeight;
-          if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
-            currentSection = sectionId;
-          }
-        }
-      });
-      
-      document.querySelectorAll('nav a').forEach(a => {
-        a.classList.remove('active');
-        if (a.getAttribute('href').substring(1) === currentSection) {
-          a.classList.add('active');
-        }
-      });
-    });
-
-  } catch (error) {
-    console.error('Error loading sections:', error);
-    loadingElement.textContent = 'Erro ao carregar o conteúdo. Por favor, recarregue a página.';
-    loadingElement.style.color = 'red';
+        allSections.forEach(section => observer.observe(section));
+      }
+    } catch (error) {
+      console.error('Error loading content:', error);
+      if (loadingElement) {
+        loadingElement.innerHTML = `
+          <p style="color: red;">Erro ao carregar o conteúdo. Por favor, recarregue a página.</p>
+          <button onclick="window.location.reload()">Recarregar</button>
+        `;
+      }
+    }
   }
+
+  loadContent();
+
+  // Navegação Suave
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        const headerOffset = 70;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // Highlight seção ativa no scroll
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.scrollY + 100;
+    
+    sections.forEach(sectionId => {
+      const section = document.querySelector(`#${sectionId}`);
+      if (section) {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+          document.querySelector(`nav a[href="#${sectionId}"]`)?.classList.add('active');
+        } else {
+          document.querySelector(`nav a[href="#${sectionId}"]`)?.classList.remove('active');
+        }
+      }
+    });
+  });
 });
