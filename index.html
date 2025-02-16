@@ -3,37 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Racismo Religioso e Pânico Satânico - Análise</title>
-  <meta name="description" content="Uma análise detalhada sobre racismo religioso, intolerância e o fenômeno do pânico satânico no Brasil e no mundo." />
+  <title>Guia Antirracista: Análise e Ação</title>
+  <meta name="description" content="Um guia abrangente sobre racismo estrutural, ação direta antirracista e ferramentas para mudança social." />
   <link rel="stylesheet" href="css/style.css">
   <script src="js/main.js" defer></script>
 </head>
 <body>
   <header>
-    <h1>Racismo Religioso e <em>Satanic Panic</em></h1>
-    <p>Uma análise sobre demonização de práticas espirituais</p>
+    <h1>Guia Antirracista</h1>
+    <p>Análise, Ação Direta e Ferramentas para Mudança</p>
     <nav>
       <ul>
-        <li><a href="#introducao">Intro</a></li>
+        <li><a href="#intro">Intro</a></li>
         <li><a href="#panic">Pânico</a></li>
         <li><a href="#evandro">Evandro</a></li>
         <li><a href="#percepcao">Percepção</a></li>
-        <li><a href="#controle">Controle</a></li>
-        <li><a href="#impacto">Impacto</a></li>
-        <li><a href="#academico">Academia</a></li>
-        <li><a href="#vozes">Vozes</a></li>
-        <li><a href="#recursos">Recursos</a></li>
+        <li><a href="#acao-direta">Ação Direta</a></li>
+        <li><a href="#engajamento">Engajamento</a></li>
+        <li><a href="#ferramentas">Ferramentas</a></li>
       </ul>
     </nav>
   </header>
 
   <main id="content">
-    <div id="loading">Carregando conteúdo...</div>
+    <div id="loading">
+      <div class="spinner"></div>
+      <p>Carregando conteúdo...</p>
+    </div>
   </main>
 
   <footer>
-    <p><strong>Créditos:</strong> Artigo elaborado com base em pesquisas históricas e análises acadêmicas.</p>
-    <p><small>© 2025 - Todos os direitos reservados</small></p>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Sobre este Guia</h4>
+        <p>Um projeto colaborativo para disseminar conhecimento e estratégias de ação antirracista.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Canais de Denúncia</h4>
+        <ul>
+          <li>Disque 100 - Direitos Humanos</li>
+          <li>SaferNet Brasil</li>
+          <li>Ouvidorias Locais</li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Links Úteis</h4>
+        <ul>
+          <li><a href="https://www.geledes.org.br" target="_blank" rel="noopener">Portal Geledés</a></li>
+          <li><a href="https://almapreta.com" target="_blank" rel="noopener">Alma Preta</a></li>
+          <li><a href="https://www.uneafrobrasil.org" target="_blank" rel="noopener">UNEafro Brasil</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p><small>© 2025 - Este conteúdo está disponível sob licença Creative Commons BY-SA 4.0</small></p>
+      <p><small>Desenvolvido com propósito educacional e ativista</small></p>
+    </div>
   </footer>
+
+  <div id="back-to-top" class="hidden">
+    <button aria-label="Voltar ao topo">↑</button>
+  </div>
+
+  <script>
+    // Botão Voltar ao Topo
+    const backToTopButton = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopButton.classList.remove('hidden');
+      } else {
+        backToTopButton.classList.add('hidden');
+      }
+    });
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
 </body>
 </html>
