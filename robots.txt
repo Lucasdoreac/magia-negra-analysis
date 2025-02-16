@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://lucasdoreac.github.io/magia-negra-analysis/sitemap.xml
