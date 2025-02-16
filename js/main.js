@@ -1,7 +1,17 @@
 document.addEventListener('DOMContentLoaded', async function() {
   const mainContent = document.querySelector('#content');
   const loadingElement = document.querySelector('#loading');
-  const sections = ['introducao', 'panic', 'evandro', 'percepcao', 'controle', 'impacto'];
+  const sections = [
+    'introducao', 
+    'panic', 
+    'evandro', 
+    'percepcao', 
+    'controle', 
+    'impacto',
+    'academico',
+    'vozes',
+    'recursos'
+  ];
   
   try {
     const contentPromises = sections.map(section =>
@@ -35,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       });
     });
 
-    // Adiciona classe para seções visíveis
+    // Adiciona animações de entrada para seções
     const observerOptions = {
       root: null,
       rootMargin: '0px',
@@ -46,12 +56,43 @@ document.addEventListener('DOMContentLoaded', async function() {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          // Carrega imagens quando a seção se torna visível
+          entry.target.querySelectorAll('img[loading="lazy"]').forEach(img => {
+            img.src = img.getAttribute('data-src');
+          });
         }
       });
     }, observerOptions);
 
     document.querySelectorAll('.section-content').forEach(section => {
+      section.classList.add('fade-in');
       sectionObserver.observe(section);
+    });
+
+    // Atualiza navegação ativa durante o scroll
+    const nav = document.querySelector('nav');
+    const navHeight = nav.offsetHeight;
+    
+    window.addEventListener('scroll', () => {
+      let currentSection = '';
+      
+      sections.forEach(sectionId => {
+        const section = document.querySelector(`#${sectionId}`);
+        if (section) {
+          const sectionTop = section.offsetTop - navHeight;
+          const sectionHeight = section.offsetHeight;
+          if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+            currentSection = sectionId;
+          }
+        }
+      });
+      
+      document.querySelectorAll('nav a').forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href').substring(1) === currentSection) {
+          a.classList.add('active');
+        }
+      });
     });
 
   } catch (error) {
