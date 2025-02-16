@@ -1,12 +1,17 @@
 document.addEventListener('DOMContentLoaded', async function() {
   const mainContent = document.querySelector('#content');
   const loadingElement = document.querySelector('#loading');
-  const sections = ['introducao', 'panic', 'evandro', 'percepcao'];
+  const sections = ['introducao', 'panic', 'evandro', 'percepcao', 'controle', 'impacto'];
   
   try {
     const contentPromises = sections.map(section =>
       fetch(`sections/${section}.html`)
-        .then(response => response.text())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.text();
+        })
     );
 
     const contents = await Promise.all(contentPromises);
@@ -21,11 +26,32 @@ document.addEventListener('DOMContentLoaded', async function() {
         e.preventDefault();
         const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
-        targetElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
       });
+    });
+
+    // Adiciona classe para seções visíveis
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.section-content').forEach(section => {
+      sectionObserver.observe(section);
     });
 
   } catch (error) {
