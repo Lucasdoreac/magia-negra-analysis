@@ -1,61 +1,102 @@
-# Magia Negra e Satanic Panic - Análise Detalhada
+# Racismo Religioso e Satanic Panic
 
-Este repositório contém uma análise detalhada sobre a demonização de práticas espirituais e pânicos morais, focando em eventos históricos como o Pânico Satânico dos anos 80/90 e o Caso Evandro no Brasil.
+Uma análise aprofundada sobre a demonização de práticas espirituais, racismo religioso e pânicos morais, com foco no Brasil e suas repercussões globais.
 
 ## 🌐 Site
 
 O site está disponível em: [https://lucasdoreac.github.io/magia-negra-analysis/](https://lucasdoreac.github.io/magia-negra-analysis/)
 
-## 📁 Estrutura do Projeto
+## 📑 Conteúdo
+
+O projeto analisa diversos aspectos relacionados ao racismo religioso e pânicos morais:
+
+- **Introdução**: Contextualização histórica
+- **Pânico Satânico**: Análise do fenômeno global
+- **Caso Evandro**: Estudo de caso brasileiro
+- **Percepção Pública**: Impacto na sociedade
+- **Controle e Resistência**: Mecanismos sociais
+- **Impactos e Futuro**: Perspectivas atuais
+- **Perspectivas Acadêmicas**: Análises científicas
+- **Vozes da Comunidade**: Depoimentos e experiências
+- **Recursos**: Bibliografia e referências
+
+## 🛠️ Tecnologias
+
+- HTML5 semântico
+- CSS3 com animações e responsividade
+- JavaScript moderno (ES6+)
+- Intersection Observer API
+- GitHub Pages para hospedagem
+
+## 📦 Estrutura do Projeto
 
 ```
 magia-negra-analysis/
 ├── css/
 │   └── style.css          # Estilos da página
 ├── js/
-│   └── main.js            # JavaScript para carregamento dinâmico
-├── sections/
-│   ├── introducao.html    # Seção de introdução
-│   ├── panic.html         # Seção sobre Pânico Satânico
-│   ├── evandro.html       # Seção sobre o Caso Evandro
-│   └── percepcao.html     # Seção sobre Percepção Pública
-└── index.html             # Página principal
+│   └── main.js            # JavaScript para interatividade
+├── sections/              # Seções de conteúdo
+│   ├── introducao.html
+│   ├── panic.html
+│   ├── evandro.html
+│   ├── percepcao.html
+│   ├── controle.html
+│   ├── impacto.html
+│   ├── academico.html
+│   ├── vozes.html
+│   └── recursos.html
+└── index.html            # Página principal
 ```
 
-## 🛠️ Tecnologias Utilizadas
-
-- HTML5
-- CSS3
-- JavaScript (ES6+)
-- Lazy Loading para imagens
-- GitHub Pages para hospedagem
-
-## 📦 Instalação Local
+## 🚀 Instalação Local
 
 1. Clone o repositório:
-```bash
+\`\`\`bash
 git clone https://github.com/Lucasdoreac/magia-negra-analysis.git
-```
+\`\`\`
 
 2. Navegue até o diretório:
-```bash
+\`\`\`bash
 cd magia-negra-analysis
-```
+\`\`\`
 
-3. Abra o arquivo `index.html` em um servidor local
-
-**Nota:** Devido ao carregamento dinâmico de seções, é necessário um servidor web para executar localmente. Você pode usar o Python para criar um servidor simples:
-
-```bash
+3. Sirva os arquivos usando um servidor local:
+\`\`\`bash
+# Python 3
 python -m http.server 8000
-```
 
-Então acesse `http://localhost:8000` no seu navegador.
+# Node.js
+npx serve
+\`\`\`
+
+4. Acesse http://localhost:8000 no navegador
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Para contribuir:
+
+1. Faça um Fork do projeto
+2. Crie uma branch para sua feature: \`git checkout -b feature/NovaFeature\`
+3. Commit suas mudanças: \`git commit -m 'Adiciona nova feature'\`
+4. Push para a branch: \`git push origin feature/NovaFeature\`
+5. Abra um Pull Request
 
 ## 📄 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-## 🤝 Contribuindo
+## 📚 Referências
 
-Contribuições são bem-vindas! Por favor, leia as [diretrizes de contribuição](CONTRIBUTING.md) antes de submeter um Pull Request.
+- Bibliografia acadêmica
+- Documentários e reportagens
+- Depoimentos e entrevistas
+- Artigos científicos
+
+## 👥 Contribuidores
+
+- Lucas Dórea (Desenvolvedor principal)
+
+## 📬 Contato
+
+Para dúvidas, sugestões ou colaborações, abra uma issue ou entre em contato através do GitHub.
