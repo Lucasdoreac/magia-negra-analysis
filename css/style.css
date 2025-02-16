@@ -5,6 +5,8 @@ body {
   background-color: #f9f9f9;
   color: #333;
   line-height: 1.6;
+  position: relative;
+  min-height: 100vh;
 }
 
 /* Header and Navigation */
@@ -62,4 +64,186 @@ nav ul li a.active {
   color: #222;
 }
 
-/* Rest of your CSS remains the same */
+/* Main Content */
+main {
+  max-width: 800px;
+  margin: 2em auto;
+  padding: 0 1em;
+  padding-bottom: 4em; /* Espaço para o footer */
+}
+
+/* Loading Indicator */
+#loading {
+  text-align: center;
+  padding: 2em;
+  color: #666;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 1em;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Sections */
+.section-content {
+  margin-bottom: 4em;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.section-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Resource Categories */
+.resource-category {
+  margin-bottom: 2em;
+  padding: 1em;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.resource-category h4 {
+  color: #222;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+/* Important Notes */
+.important-note {
+  background-color: #fff3cd;
+  border-left: 4px solid #ffcc33;
+  padding: 1em;
+  margin: 1.5em 0;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Footer */
+footer {
+  background-color: #222;
+  color: #ccc;
+  padding: 2em;
+  margin-top: 4em;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2em;
+}
+
+.footer-section h4 {
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.5em;
+}
+
+.footer-section a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-section a:hover {
+  color: #ffcc33;
+}
+
+.footer-bottom {
+  margin-top: 2em;
+  padding-top: 1em;
+  border-top: 1px solid #444;
+  text-align: center;
+}
+
+/* Back to Top Button */
+#back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
+  transition: opacity 0.3s;
+}
+
+#back-to-top.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#back-to-top button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: #ffcc33;
+  color: #222;
+  font-size: 1.2em;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+}
+
+#back-to-top button:hover {
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-section {
+    text-align: center;
+  }
+  
+  #back-to-top {
+    bottom: 10px;
+    right: 10px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  header {
+    position: static;
+  }
+  
+  #back-to-top {
+    display: none;
+  }
+  
+  .section-content {
+    opacity: 1;
+    transform: none;
+  }
+}
