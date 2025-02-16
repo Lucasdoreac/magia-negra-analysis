@@ -1,3 +1,4 @@
+/* Base styles */
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -6,10 +7,14 @@ body {
   line-height: 1.6;
 }
 
+/* Header and Navigation */
 header {
   background-color: #222;
   color: #fff;
   padding: 1.5em 2em;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
@@ -41,13 +46,22 @@ nav ul li a {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
-  transition: color 0.3s;
+  transition: all 0.3s ease;
+  padding: 0.5em 1em;
+  border-radius: 4px;
 }
 
 nav ul li a:hover {
   color: #ffcc33;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
+nav ul li a.active {
+  background-color: #ffcc33;
+  color: #222;
+}
+
+/* Main Content */
 main {
   max-width: 800px;
   margin: 2em auto;
@@ -58,6 +72,20 @@ main {
   text-align: center;
   padding: 2em;
   color: #666;
+  font-style: italic;
+}
+
+/* Section Styles */
+.section-content {
+  margin-bottom: 4em;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.section-content.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 h2 {
@@ -81,6 +109,7 @@ p {
   margin: 0.5em 0;
 }
 
+/* Lists */
 ul {
   margin: 0.5em 0 1em 1.2em;
 }
@@ -89,6 +118,21 @@ ul li {
   margin: 0.3em 0;
 }
 
+.resource-list {
+  list-style: none;
+  padding: 0;
+}
+
+.resource-list > li {
+  margin-bottom: 1.5em;
+}
+
+.resource-list ul {
+  margin-left: 1.5em;
+  margin-top: 0.5em;
+}
+
+/* Images */
 figure {
   margin: 1.5em 0;
   text-align: center;
@@ -113,12 +157,34 @@ figcaption {
   padding: 0 1em;
 }
 
+/* Blockquotes */
+blockquote {
+  margin: 2em 0;
+  padding: 1em 2em;
+  border-left: 4px solid #ffcc33;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+blockquote p {
+  font-style: italic;
+  margin: 0;
+}
+
+blockquote cite {
+  display: block;
+  margin-top: 1em;
+  color: #666;
+  font-size: 0.9em;
+}
+
+/* Footer */
 footer {
   background-color: #222;
   color: #ccc;
   padding: 1.5em 2em;
   margin-top: 2em;
-  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
 footer p {
@@ -132,19 +198,53 @@ footer a {
   text-decoration: underline;
 }
 
+/* Responsive Design */
 @media (max-width: 600px) {
+  header {
+    padding: 1em;
+  }
+
   nav ul {
     flex-direction: column;
     align-items: start;
   }
-  header, footer {
-    text-align: center;
-    padding: 1em;
+
+  nav ul li {
+    margin: 0.3em 0;
+    width: 100%;
   }
+
+  nav ul li a {
+    display: block;
+    padding: 0.5em;
+  }
+
   main {
     padding: 0 1em;
   }
+
   h2 {
     font-size: 1.5em;
   }
+
+  blockquote {
+    padding: 1em;
+    margin: 1.5em 0;
+  }
+}
+
+/* Animation Classes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
 }
