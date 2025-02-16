@@ -10,6 +10,7 @@ header {
   background-color: #222;
   color: #fff;
   padding: 1.5em 2em;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 header h1 {
@@ -33,11 +34,7 @@ nav ul {
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-}
-
-nav ul li {
-  margin-right: 1.5em;
-  margin-bottom: 0.5em;
+  gap: 1.5em;
 }
 
 nav ul li a {
@@ -57,12 +54,19 @@ main {
   padding: 0 1em;
 }
 
+#loading {
+  text-align: center;
+  padding: 2em;
+  color: #666;
+}
+
 h2 {
   font-size: 1.8em;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
   border-bottom: 2px solid #ccc;
   padding-bottom: 0.2em;
+  color: #222;
 }
 
 h3 {
@@ -95,12 +99,18 @@ figure img {
   height: auto;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+figure img:hover {
+  transform: scale(1.02);
 }
 
 figcaption {
   font-size: 0.9em;
   color: #555;
   margin-top: 0.5em;
+  padding: 0 1em;
 }
 
 footer {
@@ -108,11 +118,13 @@ footer {
   color: #ccc;
   padding: 1.5em 2em;
   margin-top: 2em;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
 }
 
 footer p {
   margin: 0.3em 0;
   font-size: 0.9em;
+  text-align: center;
 }
 
 footer a {
@@ -125,14 +137,14 @@ footer a {
     flex-direction: column;
     align-items: start;
   }
-  nav ul li {
-    margin: 0.3em 0;
-  }
   header, footer {
     text-align: center;
+    padding: 1em;
   }
-  nav ul li a {
-    display: inline-block;
-    padding: 0.2em 0;
+  main {
+    padding: 0 1em;
+  }
+  h2 {
+    font-size: 1.5em;
   }
 }
