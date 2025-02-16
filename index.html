@@ -10,26 +10,37 @@
 </head>
 <body>
   <header>
-    <h1>Guia Antirracista</h1>
-    <p>Análise, Ação Direta e Ferramentas para Mudança</p>
-    <nav>
-      <ul>
-        <li><a href="#intro">Intro</a></li>
-        <li><a href="#panic">Pânico</a></li>
-        <li><a href="#evandro">Evandro</a></li>
-        <li><a href="#percepcao">Percepção</a></li>
-        <li><a href="#acao-direta">Ação Direta</a></li>
-        <li><a href="#engajamento">Engajamento</a></li>
-        <li><a href="#ferramentas">Ferramentas</a></li>
-      </ul>
-    </nav>
+    <div class="header-content">
+      <div class="site-title">
+        <h1>Guia Antirracista</h1>
+      </div>
+      <button class="nav-toggle" aria-label="Abrir menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <nav>
+        <ul>
+          <li><a href="#intro">Intro</a></li>
+          <li><a href="#panic">Pânico</a></li>
+          <li><a href="#evandro">Evandro</a></li>
+          <li><a href="#percepcao">Percepção</a></li>
+          <li><a href="#acao-direta">Ação Direta</a></li>
+          <li><a href="#engajamento">Engajamento</a></li>
+          <li><a href="#ferramentas">Ferramentas</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main id="content">
-    <div id="loading">
+  <main>
+    <div id="loading" class="loading">
       <div class="spinner"></div>
       <p>Carregando conteúdo...</p>
     </div>
+    <div id="content"></div>
   </main>
 
   <footer>
@@ -57,29 +68,34 @@
         </ul>
       </div>
     </div>
-    
-    <div class="footer-bottom">
-      <p><small>© 2025 - Este conteúdo está disponível sob licença Creative Commons BY-SA 4.0</small></p>
-      <p><small>Desenvolvido com propósito educacional e ativista</small></p>
-    </div>
   </footer>
 
-  <div id="back-to-top" class="hidden">
-    <button aria-label="Voltar ao topo">↑</button>
-  </div>
-
   <script>
-    // Botão Voltar ao Topo
-    const backToTopButton = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTopButton.classList.remove('hidden');
-      } else {
-        backToTopButton.classList.add('hidden');
-      }
+    // Menu móvel
+    const navToggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('nav');
+    
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      navToggle.setAttribute('aria-expanded', 
+        nav.classList.contains('active')
+      );
     });
-    backToTopButton.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Fechar menu ao clicar em um link
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Fechar menu ao redimensionar para desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) {
+        nav.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
     });
   </script>
 </body>
